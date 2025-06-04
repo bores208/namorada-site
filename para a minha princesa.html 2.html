@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Para Estefany 💖</title>
+
+<!-- Fonte cursiva delicada -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+
+<style>
+  /* Reset básico */
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    background: linear-gradient(270deg, #ffe6f0, #ccf2ff, #ffe6f0);
+    background-size: 600% 600%;
+    animation: gradientFlow 30s ease infinite;
+    font-family: 'Dancing Script', cursive;
+    color: #333;
+    text-align: center;
+    user-select: none;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Container das telas */
+  #startScreen, #clickScreen, #messageScreen {
+    padding: 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hidden {
+    display: none !important;
+  }
+
+  /* Títulos */
+  h1 {
+    color: #ff4081;
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 5px rgba(255, 64, 129, 0.3);
+  }
+
+  /* Parágrafos com maior espaçamento e delicadeza */
+  p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #5a4b5a;
+    white-space: pre-wrap;
+    max-width: 90vw;
+    margin: 0 auto 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Botões */
+  button {
+    background: #ff4081;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.6);
+    transition: background-color 0.3s ease, transform 0.15s ease;
+    font-family: 'Dancing Script', cursive;
+    user-select: none;
+  }
+  button:hover, button:focus {
+    background: #e03075;
+    outline: none;
+    transform: scale(1.05);
+  }
+  button:active {
+    transform: scale(0.95);
+  }
+
+  /* Coração - SVG inline para controle total */
+  #heart {
+    width: 120px;
+    height: 120px;
+    margin: 1rem auto 0;
+    cursor: pointer;
+    filter: drop-shadow(0 0 5px #ff4081aa);
+    user-select: none;
+    outline-offset: 4px;
+    position: relative;
+  }
+  #heart svg {
+    width: 100%;
+    height: 100%;
+    fill: #ff4081;
+    filter: drop-shadow(0 0 7px #ff80abbb);
+    transform-origin: center;
+    animation: pulseHeart 2.5s ease-in-out infinite;
+  }
+  #heart:focus svg {
+    filter: drop-shadow(0 0 15px #ff80ab);
+  }
+
+  /* Animação suave pulsante */
+  @keyframes pulseHeart {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  /* Clique animação "batida" rápida e brilho */
+  #heart.click-effect svg {
+    animation: none !important;
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 20px #ff4081ee);
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+  #heart.click-effect .shine {
+    animation: shineEffect 0.6s ease forwards;
+  }
+  @keyframes shineEffect {
+    0% { opacity: 0; transform: translateX(-50%) scale(0.6); }
+    50% { opacity: 1; transform: translateX(50%) scale(1.2); }
+    100% { opacity: 0; transform: translateX(150%) scale(0.6); }
+  }
+
+  /* Tela de mensagem surpresa */
+  .surprise {
+    font-size: 2rem;
+    color: #ff4081;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px #ff80abcc;
+    animation: popUp 1s ease-in-out forwards;
+    position: relative;
+  }
+
+  /* Efeito popUp */
+  @keyframes popUp {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Vídeo estilizado */
+  video {
+    width: 90vw;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(255, 64, 129, 0.3);
+    margin: 1rem auto 2rem;
+    display: block;
+  }
+
+  /* Ícones flutuantes */
+  .floating-icon {
+    position: fixed;
+    pointer-events: none;
+    will-change: transform, opacity;
+    user-select: none;
+    z-index: 1000;
+  }
+
+  /* Responsividade */
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.1rem;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.7rem 1.4rem;
+    }
+    #heart {
+      width: 90px;
+      height: 90px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Tela inicial -->
+<div id="startScreen" role="main">
+  <h1>Para Estefany 💖</h1>
+  <button id="startBtn" aria-label="Começar interação clicando no coração">Começar 💕</button>
+</div>
+
+<!-- Tela de clique no coração -->
+<div id="clickScreen" class="hidden" role="main" aria-live="polite" aria-describedby="instructions">
+  <div id="heart" role="button" tabindex="0" aria-label="Coração para clicar" aria-describedby="instructions">
+    <!-- SVG do coração -->
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 
+               4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09 
+               C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5 
+               c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+    </svg>
+    <!-- brilho animado -->
+    <div class="shine" style="
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      opacity: 0;
+      filter: drop-shadow(0 0 6px #fff);
+      background: linear-gradient(120deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 80%);
+      transform: translateX(-50%) scale(0.6);
+      border-radius: 50%;
+    "></div>
+  </div>
+  <div id="instructions" style="font-size:1.1rem; color:#aa789e; margin-top: 1rem;">
+    Clique no coração para revelar sua surpresa!
+  </div>
+</div>
+
+<!-- Tela de mensagem desbloqueada -->
+<div id="messageScreen" class="hidden" role="main" aria-live="polite">
+  <div class="surprise">🎉 SURPRESA! Você desbloqueou uma mensagem especial! 💘</div>
+  <h1>Feliz Dia dos Namorados, Estefany 💖</h1>
+  <p id="animatedText"></p>
+  <video controls playsinline muted>
+    <source src="video.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeo.
+  </video>
+  <button id="backBtn" aria-label="Voltar para o início">Voltar</button>
+</div>
+
+<!-- Sons -->
+<audio id="clickSound" preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_03b51a2114.mp3?filename=mouse-click-153941.mp3"></audio>
+<audio id="hoverSound" preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_67b6d5b29d.mp3?filename=soft-hover-14513.mp3"></audio>
+
+<script>
+(() => {
+  const maxClicks = 45;
+  let clicks = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const clickScreen = document.getElementById('clickScreen');
+  const messageScreen = document.getElementById('messageScreen');
+
+  const heart = document.getElementById('heart');
+  const clickSound = document.getElementById('clickSound');
+  const hoverSound = document.getElementById('hoverSound');
+  const startBtn = document.getElementById('startBtn');
+  const backBtn = document.getElementById('backBtn');
+  const animatedText = document.getElementById('animatedText');
+  const shine = heart.querySelector('.shine');
+  const video = messageScreen.querySelector('video');
+
+  const message = `Feliz Dia dos Namorados, minha princesa linda e maravilhosa 🥰🫶🏻🩵
+
+Às vezes fico lembrando das nossas conversas do nada kkkkkkkkkk das figurinhas de macaco de quando você tá com fome, aí tenho que dizer que tem que comer comida de verdade e não miojo e quando chega na escola já tá com sono kkkkkk ou na correria da escola pro curso e percebo como tudo isso virou parte do meu dia. Melhor coisa 🥰
+
+Você me ganhou de um jeito que eu não sei explicar direito kkkkkkkkk e não consigo demonstrar em palavras também o quanto eu me sinto bem perto de você ou quando estou conversando com você, gatinha 🥰🥰
+
+Eu não preciso de muita coisa, só de você mesmo. No meu dia, na minha vida, nas minhas besteiras.
+Te amo minha princesa.`;
+
+  // Função para mostrar só uma tela
+  function showScreen(screen) {
+    [startScreen, clickScreen, messageScreen].forEach(s => s.classList.add('hidden'));
+    screen.classList.remove('hidden');
+  }
+
+  // Efeito de brilho no coração no clique
+  function triggerShine() {
+    shine.style.opacity = 1;
+    shine.style.animation = 'shineEffect 0.6s ease forwards';
+    setTimeout(() => {
+      shine.style.opacity = 0;
+      shine.style.animation = '';
+    }, 600);
+  }
+
+  // Efeito vibração leve no botão
+  function vibrate(element) {
+    if (navigator.vibrate) navigator.vibrate(50);
+    element.style.transition = 'transform 0.05s ease';
+    element.style.transform = 'scale(1.05)';
+    setTimeout(() => {
+      element.style.transform = 'scale(1)';
+    }, 60);
+  }
+
+  // Handle click no coração
+  function handleClick() {
+    if (clicks >= maxClicks) return;
+    clicks++;
+    clickSound.currentTime = 0;
+    clickSound.play();
+    triggerShine();
+
+    heart.classList.add('click-effect');
+    setTimeout(() => heart.classList.remove('click-effect'), 150);
+
+    if (clicks === maxClicks) {
+      // Mostra tela da mensagem com texto animado e vídeo
+      setTimeout(() => {
+        showScreen(messageScreen);
+        startConfettiFlowers();
+
+        // Tocar vídeo com áudio após garantir autoplay com muted
+        video.muted = false;  // tira mute para som
+        video.currentTime = 0;
+        video.play();
+
+        typeWriter(message, animatedText, 0);
+      }, 400);
+    }
+  }
+
+  // Animação de texto digitando
+  function typeWriter(text, element, index) {
+    if (index < text.length) {
+      element.textContent += text.charAt(index);
+      setTimeout(() => typeWriter(text, element, index + 1), 25);
+    }
+  }
+
+  // Confetti simplificado (flores rosas)
+  function startConfettiFlowers() {
+    // Em uma implementação real, aqui poderia rodar uma biblioteca confetti
+    // Ou adicionar animação CSS de flores caindo - aqui deixo simples
+    // (Pode adicionar se quiser)
+  }
+
+  // Começar interação ao clicar no botão
+  startBtn.addEventListener('click', () => {
+    showScreen(clickScreen);
+    heart.focus();
+  });
+
+  // Clicar no coração (mouse)
+  heart.addEventListener('click', () => {
+    handleClick();
+  });
+
+  // Acessibilidade: ativar clique no coração com Enter ou Espaço
+  heart.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+  });
+
+  // Som ao focar no botão iniciar
+  startBtn.addEventListener('mouseenter', () => hoverSound.play());
+
+  // Botão voltar
+  backBtn.addEventListener('click', () => {
+    clicks = 0;
+    animatedText.textContent = '';
+    video.pause();
+    video.currentTime = 0;
+    video.muted = true;
+    showScreen(startScreen);
+  });
+
+})();
+</script>
+
+</body>
+</html>
